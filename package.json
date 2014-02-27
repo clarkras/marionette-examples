@@ -1,0 +1,25 @@
+{
+  "name": "marionette-examples",
+  "version": "0.0.1",
+  "description": "Backbone-Marionette examples.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clarkras/marionette-examples.git"
+  },
+  "author": "Clark Rasmussen",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "85581c668270c34f4d6932fb1bb90e8b590fd20e",
+  "devDependencies": {
+    "gulp": "~3.5.2",
+    "gulp-livereload": "~1.2.0",
+    "gulp-clean": "~0.2.4",
+    "gulp-coffee": "~1.4.1",
+    "tiny-lr": "0.0.5",
+    "gulp-util": "~2.2.14"
+  }
+}
