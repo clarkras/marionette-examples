@@ -1,0 +1,68 @@
+<head>
+    <script src="../vendor/jquery-2.1.0.js"></script>
+    <script src="../vendor/underscore.js"></script>
+    <script src="../vendor/backbone.js"></script>
+    <script src="../vendor/backbone.marionette.js"></script>
+    <script src="../public/composite-view-table.js"></script>
+    <style type="text/css">
+        table.gridtable {
+            font-family: verdana,arial,sans-serif; font-size:11px; color:#333333;
+            border-collapse: collapse; border: 1px solid #666666;
+        }
+        table.gridtable th, table.gridtable tfoot td {
+            border: 1px solid #666666;
+            padding: 8px; background-color: #dedede;
+        }
+        table.gridtable tfoot td {
+           border: none;
+        }
+        table.gridtable tfoot tr {
+            border: 1px solid #666666;
+        }
+        table.gridtable td {
+            border: 1px solid #666666;
+            padding: 8px; background-color: #ffffff;
+        }
+        .numeric {
+            text-align: right;
+        }
+        .clickable {
+            cursor: pointer;
+        }
+        .status_cell.inactive {background-color: orange}
+        .status_cell.active {color: #eee; background-color: green;}
+    </style>
+
+</head>
+
+<body>
+    <script id="row-template" type="text/html">
+        <td class="clickable status_cell <%= status_class('active', 'inactive') %>"
+            data-js="status-cell"><%= status %>
+        </td>
+        <td><%= name %></td>
+        <td class="numeric" data-js="count-cell"><%= item_count() %></td>
+    </script>
+
+    <script id="table-template" type="text/html">
+        <table class="gridtable">
+            <thead>
+            <tr>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+
+            <!-- want to insert collection items, here -->
+            <tbody></tbody>
+
+            <tfoot>
+            <tr>
+                <td>Total</td>
+                <td class="numeric" colspan=2><%= total_count() %>
+            </tr>
+            </tfoot>
+        </table>
+    </script>
+</body>

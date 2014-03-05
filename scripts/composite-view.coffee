@@ -6,7 +6,7 @@ class TreeView extends Backbone.Marionette.CompositeView
   tagName: "li"
 
   initialize: ->
-    @collection = @model.nodes
+    @collection = @model.get('nodes')
 
   appendHtml: (cv, iv) ->
     @$('ul:first').append iv.el
@@ -28,8 +28,8 @@ class TreeNode extends Backbone.Model
   initialize: ->
     nodes = @get 'nodes'
     if nodes
-      @nodes = new TreeNodeCollection(nodes)
-      @unset 'nodes'
+      nodes = new TreeNodeCollection(nodes)
+      @set 'nodes', nodes
 
 # ------------------------------------------------------------
 # TreeNodeCollection
@@ -40,8 +40,8 @@ class TreeNodeCollection extends Backbone.Collection
 # ------------------------------------------------------------
 # application code
 # ------------------------------------------------------------
+tree = new TreeNodeCollection(treeData)
+treeView = new TreeRoot collection: tree
 $ ->
-  tree = new TreeNodeCollection(treeData)
-  treeView = new TreeRoot collection: tree
   treeView.render()
   $('#tree').html treeView.el
