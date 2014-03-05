@@ -10,6 +10,7 @@ gulp.task 'coffee', ->
     .pipe(coffee({bare: true}).on('error', gutil.log))
     .pipe(gulp.dest('./public/'))
     .pipe(refresh lr_server)
+  return # without explicit return, watch task stops on coffeescript error
 
 gulp.task 'html', ->
 	gulp.src('./html/*.html')
