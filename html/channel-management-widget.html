@@ -1,0 +1,67 @@
+<head>
+    <link rel="stylesheet" href="../stylesheets/fed.min.css"/>
+    <script src="../vendor/jquery-2.1.0.js"></script>
+    <script src="../vendor/underscore.js"></script>
+    <script src="../vendor/backbone.js"></script>
+    <script src="../vendor/backbone.marionette.js"></script>
+    <script src="../public/channel-management-widget.js"></script>
+    <style type="text/css">
+        #widget-container {
+            width: 400px;
+            margin: 20px 40px;
+        }
+        li.pending {
+            background: rgb(254,235,235)
+        }
+        li.connected .channel-name, li.connected i {
+            color: rgb(60,90,151)
+        }
+        li.disconnected .channel-name, li.disconnected i {
+            color: lightgray;
+        }
+
+    </style>
+</head>
+
+<body>
+    <script id="item-template" type="text/html">
+
+        <% if (state === 'pending') { %>
+            <i class="Icon--facebook u-gamma u-valignMiddle"></i>
+            <span class=""><%= name %></span>
+            <p class="u-marginTop u-marginLeft">Are you sure you want to disconnect this channel?<br/>
+                You currently have the following items associated:</p>
+            <p class="u-marginLeftDouble"><%= posts %> Posts<br/>
+                <%= campaigns %> Campaigns</p>
+            <div class="u-centerBlock">
+                <a href="#" data-js="item-cancel">Cancel</a>
+                <span class="Button Button--small u-borderRounded pseudo-class-hover" data-js="item-disconnect">Disconnect</span>
+            </div>
+        <% } else { %>
+            <i class="Icon--facebook u-gamma u-valignMiddle"></i>
+            <span class="channel-name"><%= name %></span>
+            <span class="u-floatRight">
+                <% if (state === 'connected') { %>
+                    <span class="Button Button--small u-borderRounded pseudo-class-hover" data-js="item-disconnect">Disconnect</span>
+                <% } else { %>
+                    <a href="#" data-js="item-undo">Undo</a>
+                <% } %>
+            </span>
+        <% } %>
+    </script>
+
+    <script id="channel-management-template" type="text/html">
+        <div class="u-gamma u-marginBottom">Manage Channels</div>
+        <ul class="List List--overview" data-js="item-view-container"></ul>
+        <div class="u-clearFix"></div>
+        <div class="u-centerBlock">
+            <a href="#">Cancel</a>
+            <span class="Button Button--small u-borderRounded pseudo-class-hover" data-js="OK-button">Okay</span>
+        </div>
+    </script>
+
+    <div class="fed-wrapper">
+        <div id="widget-container"></div>
+    </div>
+
+</body>
