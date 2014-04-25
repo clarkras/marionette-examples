@@ -1,20 +1,42 @@
 <div id="mp-channel-selector-header" class="u-border u-borderRounded">
-    <% if (name_1) { %>
+
+    <!-- dropdown caret -->
+    <div class="u-floatRight">
+        <i class="Icon--roundedCaret u-marginSidesHalf u-valignMiddle"></i>
+    </div>
+
+    <% if (name.length > 0) { %>
+
+        <!-- At least one channel selected -->
         <div class="header-channel-item u-floatLeft" data-js="item-1">
-            <i class="<%= network_icon(1) %> u-beta u-valignMiddle u-paddingRightHalf"></i>
-            <span class="u-delta channel-name u-valignMiddle"><%= name_1 %></span>
+            <i class="Icon--<%= network[0] %> u-beta u-valignMiddle u-paddingRightHalf"></i>
+            <span class="u-delta channel-name u-valignMiddle"><%= name[0] %></span>
         </div>
-        <div class="header-channel-item u-floatLeft" data-js="item-2">
-            <i class="<%= network_icon(2) %> u-beta u-valignMiddle u-paddingRightHalf"></i>
-            <span class="u-delta channel-name u-valignMiddle"><%= name_2 %></span>
-        </div>
+
+        <% if (name.length > 1) { %>
+
+            <!-- At least two channels selected -->
+            <div class="header-channel-item u-floatLeft" data-js="item-2">
+                <i class="Icon--<%= network[1] %> u-beta u-valignMiddle u-paddingRightHalf"></i>
+                <span class="u-delta channel-name u-valignMiddle"><%= name[1] %></span>
+            </div>
+
+        <% } %>
+
         <div class="u-floatRight">
+            <!-- " + n more" or "" if no more -->
             <span class="qty-more u-valignMiddle"><%= qty_more %></span>
-            <i class="Icon--roundedCaret u-marginSidesHalf u-valignMiddle"></i>
         </div>
         <div class="u-clearfix"></div>
+
     <% } else { %>
+
+        <!-- No channels selected -->
         <div class="no-channels-selected u-marginHalf">Please choose a social channel.</div>
+
     <% } %>
+
 </div>
-<ul class="u-border u-borderRounded List List--overview" data-js="item-view-container"></ul>
+
+<!-- Item view container: initially hidden in collapsed state -->
+<ul class="u-hide u-border u-borderRounded List List--overview" data-js="item-view-container"></ul>

@@ -1,14 +1,6 @@
-update_model = (model, channels) ->
-  selected_channels = channels.filter (channel) ->
-    channel.get('checked') is 'checked'
-  channel_1 = selected_channels[0]?.toJSON() or {}
-  channel_2 = selected_channels[1]?.toJSON() or {}
-  model.set
-    name_1: channel_1.name
-    network_1: channel_1.network
-    name_2: channel_2.name
-    network_2: channel_2.network
-    qty_more: if selected_channels.length > 2 then "+ #{selected_channels.length - 2} more" else ''
+
+
+
 
 # ------------------------------------------------------------
 # MultiPostChannelCollapsedView
@@ -18,17 +10,8 @@ class MultiPostChannelCollapsedView extends Marionette.ItemView
   events:
     'click': 'on_click'
 
-  templateHelpers:
-    network_icon: (index) ->
-      network = if index is 1 then @network_1 else @network_2
-      "Icon--#{network}"
-
   initialize: (options) ->
     @model = new Backbone.Model()
-
-  onRender: ->
-    console.log 'element', @$el.find('[data-js=item-view-container]')
-    @$el.find('[data-js=item-view-container]').hide()
 
   onBeforeRender: ->
     update_model(@model, @collection)
@@ -46,9 +29,6 @@ class ChannelItemView extends Marionette.ItemView
   tagName: 'li'
   className: 'selector-channel-item'
   template: JST['mp_channel_item.html']
-  templateHelpers:
-    network_icon: ->
-      "Icon--#{@network}"
   triggers:
     'click': 'item-select'
 
@@ -61,10 +41,6 @@ class MultiPostChannelSelectorView extends Marionette.CompositeView
   itemViewContainer: '[data-js=item-view-container]'
   collectionEvents:
     change: 'render'
-  templateHelpers:
-    network_icon: (index) ->
-      network = if index is 1 then @network_1 else @network_2
-      "Icon--#{network}"
   events:
     'click': 'on_click'
 
@@ -73,6 +49,9 @@ class MultiPostChannelSelectorView extends Marionette.CompositeView
 
   onBeforeRender: ->
     update_model(@model, @collection)
+
+  onRender: ->
+    $('[data-js=item-view-container]', @el).removeClass 'u-hide'
 
   onAfterItemAdded: (view) ->
     view.listenTo view, 'item-select', (args) =>
@@ -85,8 +64,26 @@ class MultiPostChannelSelectorView extends Marionette.CompositeView
     $('#header-container').html view.el
 
   toggle_channel: (channel) ->
-    console.log "item-select", channel.get('name')
     channel.set 'checked', (if channel.get('checked') then '' else 'checked')
+
+# ------------------------------------------------------------
+# Shared functions
+# ------------------------------------------------------------
+
+# Internal: Updates the the header model that is shared
+# by the collapsed view and the selector view.
+#
+# model    - header model
+# channels - collection of channel models
+update_model = (model, channels) ->
+  selected_channels = channels.filter (channel) ->
+    channel.get('checked') is 'checked'
+  channel_1 = selected_channels[0]?.toJSON() or {}
+  channel_2 = selected_channels[1]?.toJSON() or {}
+  model.set
+    name: _.compact [channel_1.name, channel_2.name]
+    network: _.compact [channel_1.network, channel_2.network]
+    qty_more: if selected_channels.length > 2 then "+ #{selected_channels.length - 2} more" else ''
 
 # ------------------------------------------------------------
 # Application
