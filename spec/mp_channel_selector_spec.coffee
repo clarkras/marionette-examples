@@ -1,6 +1,6 @@
-describe 'MultiPostChannelSelector', ->
+describe 'MultiPostChannelHeaderView', ->
   beforeEach ->
-    @subject = new MultiPostChannelSelector()
+    @subject = new MultiPostChannelHeaderView()
 
   it 'should render the view', ->
     @subject.render()

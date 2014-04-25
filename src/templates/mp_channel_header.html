@@ -1,0 +1,20 @@
+<div id="mp-channel-selector-header" class="u-border u-borderRounded">
+    <% if (name_1) { %>
+        <div class="header-channel-item u-floatLeft" data-js="item-1">
+            <i class="<%= network_icon(1) %> u-beta u-valignMiddle u-paddingRightHalf"></i>
+            <span class="u-delta channel-name u-valignMiddle"><%= name_1 %></span>
+        </div>
+        <div class="header-channel-item u-floatLeft" data-js="item-2">
+            <i class="<%= network_icon(2) %> u-beta u-valignMiddle u-paddingRightHalf"></i>
+            <span class="u-delta channel-name u-valignMiddle"><%= name_2 %></span>
+        </div>
+        <div class="u-floatRight">
+            <span class="qty-more u-valignMiddle"><%= qty_more %></span>
+            <i class="Icon--roundedCaret u-marginSidesHalf u-valignMiddle"></i>
+        </div>
+        <div class="u-clearfix"></div>
+    <% } else { %>
+        <div class="no-channels-selected u-marginHalf">Please choose a social channel.</div>
+    <% } %>
+</div>
+<ul class="u-border u-borderRounded List List--overview" data-js="item-view-container"></ul>

@@ -30,7 +30,7 @@ gulp.task 'template', ->
   return
 
 gulp.task 'html', ->
-	gulp.src('./src/html/*.html')
+	gulp.src('./src/html/**/*.html')
 		.pipe(refresh lr_server)
 
 gulp.task 'livereload', ->
