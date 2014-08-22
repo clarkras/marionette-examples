@@ -12,8 +12,9 @@
         body {
             width: 700px;
         }
-        #header-container, #selector-container {
+        #selector-container {
             width: 610px;
+            position: relative;
         }
         .header-channel-item {
             width: 220px;
@@ -26,6 +27,12 @@
         li {
             cursor: pointer;
         }
+        [data-js=item-view-container] {
+            z-index: 10;
+            position: absolute;
+            background: white;
+            width: 586px;
+        }
         #mp-channel-selector-header {
             cursor: pointer;
         }
@@ -35,7 +42,21 @@
 <body>
     <div class="fed-wrapper">
         <div class="u-marginSides u-paddingSidesHalf u-paddingTop">Channels</div>
-        <div id="header-container" class="u-marginSides u-paddingSidesHalf"></div>
+        <div id="selector-container" class="u-marginSides u-paddingSidesHalf"></div>
+        <div style="margin:5px;position: relative;"><pre>
+    GIVEN a user is in Social Posts
+    AND they want to change the default copy
+    WHEN they click on the "Post" field
+    THEN enable them to edit the post copy
+    AND save changes in real time
+    AND apply the edited copy to all post channels scheduled for that day
+
+    GIVEN a user is editing the copy of a multi-post
+    AND they leave the Post copy field blank
+    WHEN they click out of the Post copy field
+    THEN show the following error message: "This field is required"
+
+        </pre></div>
     </div>
     <script>$(function () {MultiPostChannelSelectorApp()})</script>
 </body>
